@@ -91,10 +91,10 @@ module.exports = {
             maxInitialRequests: 3,
             name: true,
             cacheGroups: {
-                commons: {
-                    name: 'common',
-                    chunks: 'initial',
-                    minChunks: 2
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10,
+                    name: "vendor"
                 }
             }
         }
@@ -104,7 +104,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: resolve('src/index.html'),
             filename:'index.html',
-            chunks:['index', 'common'],
+            chunks:['index', 'vendor'],
             hash:true,//防止缓存
             minify:{
                 collapseWhitespace:true, //去除多余空格
